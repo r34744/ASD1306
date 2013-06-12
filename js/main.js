@@ -25,10 +25,26 @@ $('#AddNewRace').on('pageinit', function(){
 
 $('#PastRaces').on('pageinit', function(){
 	
+    for (var i=0, j=localStorage.length; i<j; i++) {
+        var key = localStorage.key(i);
+        var value = localStorage.getItem(key);
+        var object = JSON.parse(value);
+        var date = object[0].value;
+        $("#fromLocalStorage").append("<h3>" + date + "</h2>" + "<a href='#' class='editbutton' data-key='" + key + "'>Edit</a>");
+    };
+    
+    $(".editbutton").on("click", function(){
+        var value = localStorage.getItem(key);
+        var object = JSON.parse(value);
+        var item = $(this).data(object);
+        $("#editbox").html('<p>' + item + '<p/>');
+    })
+    
+    
     $.ajax({
-       url:"data/json.js",
-       type: "GET",
-       dataType: "json",
+       url: 'data/json.js',
+       type: 'GET',
+       dataType: 'json',
        success: function(response){
            console.log(response);
        }
