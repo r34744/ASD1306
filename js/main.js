@@ -31,6 +31,7 @@ $('#PastRaces').on('pageinit', function(){
         var object = JSON.parse(value);
         var date = object[0].value;
         $("#fromLocalStorage").append("<h3>" + date + "</h2>" + "<a href='#' class='editbutton' data-key='" + key + "'>Edit</a>");
+           
     };
     
     $(".editbutton").on("click", function(){
@@ -42,7 +43,7 @@ $('#PastRaces').on('pageinit', function(){
     
     
     $.ajax({
-       url: 'data/json.js',
+       url: 'xhr/json.js',
        type: 'GET',
        dataType: 'json',
        success: function(response){
