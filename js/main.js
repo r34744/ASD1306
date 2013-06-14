@@ -62,20 +62,17 @@ $('#PastRaces').on('pageinit', function(){
     
     
     $.ajax({
-       url: 'xhr/other.php',
+       url: 'xhr/other.xml',
        type: 'GET',
-       dataType: 'json',
+       dataType: 'xml',
        success: function(response){
-           for (var i=0, j=response.races.length; i<j; i++){
-                var races = response.races[i];
-                var JSONraceDate = races.date;
-                $("#fromOther").append("<h3>" + JSONraceDate + "</h3>" + "<a href='#' class='editbutton' data-key='" + key + "'>| Edit |</a>"
-                                       + "<a href='#' class='deletebutton' data-key='" + key + "'> | Delete |</a>");
-           
-           };
-           
-    
-       }
+            var data = $.parseXML(response);
+            var races = $(data);
+            races.find("race").each(function(){
+            var race = $(this);
+            console.log(race.find("date"));
+            });
+        }
     });
     
     
