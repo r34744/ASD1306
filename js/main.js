@@ -30,17 +30,34 @@ $('#PastRaces').on('pageinit', function(){
         var value = localStorage.getItem(key);
         var object = JSON.parse(value);
         var date = object[0].value;
-        $("#fromLocalStorage").append("<h3>" + date + "</h3>" + "<a href='#' class='editbutton' data-key='" + key + "'>| Edit |</a>"
+        $("#fromLocalStorage").append("<h3>" + date + "</h3>" + "<a href='#AddNewRace' id='editbutton' data-key='" + key + "'>| Edit |</a>"
                                        + "<a href='#' class='deletebutton' data-key='" + key + "'> | Delete |</a>");
-           
+         
     };
     
-    $(".editbutton").on("click", function(){
+    $("#fromLocalStorage").append('<p></p>');
+    $("#fromLocalStorage").append('<a href="#" id="deletestorage" data-role="button">Delete Local Storage</a>');
+    
+    $("#deletestorage").on("click", function(){
+        localStorage.clear();
+        location.reload(true);
+        return false;
+    });
+    
+    $("#editbutton").on("click", function(key){
         var value = localStorage.getItem(key);
         var object = JSON.parse(value);
         var item = $(this).data(object);
+        console.log(key);
         $("#date").val(value[0]);
-    })
+        $("#teamname1").val(value[1]);
+        $("#teamname2").val(value[2]);
+        $("#teamname3").val(value[3]);
+        $("#teamname4").val(value[4]);
+        $("#teamname5").val(value[5]);
+        $("#teamname6").val(value[6]);
+    });
+    
     
     
     $.ajax({
@@ -65,15 +82,16 @@ $('#PastRaces').on('pageinit', function(){
        url: 'xhr/other.xml',
        type: 'GET',
        dataType: 'xml',
-       success: function(response){
-            var data = $.parseXML(response);
-            var races = $(data);
-            races.find("race").each(function(){
-            var race = $(this);
-            console.log(race.find("date"));
+       success: function(result){
+            $(result).find('races').each(function() {
+                $(this).find("race").each(function() {});
+                $(this).find("date").text();
             });
-        }
+       }
     });
+    
+    
+   
     
     
 });
