@@ -68,8 +68,7 @@ $('#PastRaces').on('pageinit', function(){
            for (var i=0, j=response.races.length; i<j; i++){
                 var races = response.races[i];
                 var JSONraceDate = races.date;
-                $("#fromJSON").append("<h3>" + JSONraceDate + "</h3>" + "<a href='#' class='editbutton' data-key='" + key + "'>| Edit |</a>"
-                                       + "<a href='#' class='deletebutton' data-key='" + key + "'> | Delete |</a>");
+                $("#fromJSON").append("<h3>" + JSONraceDate + "</h3>");
            
            };
            
@@ -82,10 +81,13 @@ $('#PastRaces').on('pageinit', function(){
        url: 'xhr/other.xml',
        type: 'GET',
        dataType: 'xml',
-       success: function(result){
-            $(result).find('races').each(function() {
-                $(this).find("race").each(function() {});
-                $(this).find("date").text();
+       success: function(data){
+            $(data).find('race').each(function() {
+                var $race = $(this);
+                var raceDate= $race.find('date').text();
+                var html = "<div class='data'>";
+                html += '<h3>' + raceDate + '</h3>';
+                $("#fromOther").append(html);
             });
        }
     });
