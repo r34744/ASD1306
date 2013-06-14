@@ -16,10 +16,8 @@ $('#AddNewRace').on('pageinit', function(){
             var id=Math.floor(Math.random()*100000000);
             localStorage.setItem(id, JSON.stringify(data));
             alert("Teams are saved");
-            
         }
-       
-    });
+     });
 
 });
 
@@ -69,11 +67,8 @@ $('#PastRaces').on('pageinit', function(){
                 var races = response.races[i];
                 var JSONraceDate = races.date;
                 $("#fromJSON").append("<h3>" + JSONraceDate + "</h3>");
-           
            };
-           
-    
-       }
+        }
     });
     
     
@@ -89,7 +84,7 @@ $('#PastRaces').on('pageinit', function(){
                 html += '<h3>' + raceDate + '</h3>';
                 $("#fromOther").append(html);
             });
-       }
+        }
     });
     
     
